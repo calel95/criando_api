@@ -2,6 +2,7 @@
 from sqlalchemy import Column, Integer, String, DateTime, Select
 from sqlalchemy.sql import func
 from db import Base
+from pydantic import BaseModel
 
 class Filme(Base):
     __tablename__ = 'filmes'
@@ -11,7 +12,8 @@ class Filme(Base):
     completed = Column(bool)
     created_at = Column(DateTime, default=func.now())
 
-    id: Optional[object] = None
-    title: str
-    description: Optional[str] = None
-    completed: bool = False
+class Task(BaseModel):
+   id: Optional[UUID] = None
+   title: str
+   description: Optional[str] = None
+   completed: bool = False
