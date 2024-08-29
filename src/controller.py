@@ -11,9 +11,9 @@ from . import models
 
 
 def create_produt(db: Session, produto:schema.Produto):
-    db_produtos = models.Estoque(produto=produto.produto, preco=produto.preco)
+    pk = str(uuid4())
+    db_produtos = models.Estoque(id=pk, produto=produto.produto, preco=produto.preco)
     db.add(db_produtos)
     db.commit()
     db.refresh(db_produtos)
     return db_produtos
-
