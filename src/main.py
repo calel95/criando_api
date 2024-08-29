@@ -10,13 +10,6 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-# Dependency
-# def get_db():
-#     db = SessionLocal()
-#     try:
-#         yield db
-#     finally:
-#         db.close()
 
 # Dependency
 def get_db():
@@ -27,15 +20,12 @@ def get_db():
 def create_product(produto: schema.Produto, db: Session = Depends(get_db)):
     db_produto = controller.create_produt(db=db, produto=produto)   
     return db_produto
-    # db_produtos = controller.create_produt(db, product=produto.product)
-    # if db_produtos:
-    #     raise HTTPException(status_code=400, detail="Produto já cadastrado!")
-    # return controller.create_produt(db=db, product=produto)
 
-# @app.get("/produtos/", response_model=schema.ProdutoList)
-# def read_products(db: Session = Depends(get_db)):
-#     produtos = controller.get_products(db)
-#     return produtos
+
+@app.get("/produtos/", response_model=list[schema.Produto])
+def read_products(db: Session = Depends(get_db)):
+    produtos = controller.get_products(db)
+    return produtos
 
 
 

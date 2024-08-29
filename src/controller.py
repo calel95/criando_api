@@ -6,8 +6,8 @@ from . import schema
 from . import models
 
 
-# def get_products(db: Session,skip: int = 0, limit: int = 100):
-#     return db.query(models.Estoque).offset(skip).limit(limit).all()
+def get_products(db: Session,skip: int = 0, limit: int = 100):
+    return db.query(models.Estoque).offset(skip).limit(limit).all()
 
 
 def create_produt(db: Session, produto:schema.Produto):

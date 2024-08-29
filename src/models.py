@@ -9,5 +9,5 @@ class Estoque(Base):
     produto = Column(String)
     preco = Column(Integer)
     #is_empty = Column(Boolean)
-    #created_at = Column(DateTime, default=func.now())
+    created_at = Column(DateTime, default=func.now())
 

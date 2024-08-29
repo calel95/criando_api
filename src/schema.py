@@ -6,7 +6,7 @@ from uuid import UUID, uuid4
 
 
 class Produto(BaseModel):
-    #id: Optional[int] = None
+    id: Optional[UUID] = None
     produto: str
     preco: int
     #is_empty: bool = False
