@@ -27,6 +27,16 @@ def read_products(db: Session = Depends(get_db)):
     produtos = controller.get_products(db)
     return produtos
 
+@app.get("/produtos/{produto_id}", response_model=schema.Produto)
+def read_one_product(produto_id: str, db: Session = Depends(get_db)):
+    db_produto = controller.get_one_product(db=db, produto_id=produto_id)
+    return db_produto
+
+@app.put("/produtos/{produto_id}", response_model=schema.Produto)
+def update_one_product(produto_id:str, produto:schema.Produto, db: Session = Depends(get_db)):
+    update_produto = controller.update_product(db=db, produto_id=produto_id,produto=produto)
+    return update_produto
+
 
 
 
