@@ -26,9 +26,14 @@ def update_product(db: Session, produto_id: str, produto: schema.Produto):
         return None  # ou você pode levantar uma exceção aqui  
     db_produto.produto = produto.produto
     db_produto.preco = produto.preco
-
     db.commit()
     db.refresh(db_produto)
     return db_produto
 
-
+def delete_product(db: Session, produto_id: str):
+    db_produto =  db.query(models.Estoque).filter(models.Estoque.id == produto_id).first()
+    if db_produto is None:
+        return None
+    db.delete(db_produto)
+    db.commit()
+    return db_produto

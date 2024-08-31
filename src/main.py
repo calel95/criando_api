@@ -37,7 +37,12 @@ def update_one_product(produto_id:str, produto:schema.Produto, db: Session = Dep
     update_produto = controller.update_product(db=db, produto_id=produto_id,produto=produto)
     return update_produto
 
-
+@app.delete("/produtos/{produto_id}", response_model=schema.Produto)
+def delete_one_product(produto_id: str, db: Session = Depends(get_db)):
+    product_deleted = controller.delete_product(db=db,produto_id=produto_id)
+    if product_deleted is None:
+        raise HTTPException(status_code=404, detail="Task nao encontrada!!")
+    return product_deleted
 
 
 
