@@ -10,8 +10,6 @@ class Produto(BaseModel):
     id: Optional[UUID] = None
     produto: str | None = None
     preco: int | None = None
-    
-    #is_empty: bool = False
 
     class Config:
         from_attributes = True
