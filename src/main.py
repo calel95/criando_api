@@ -22,12 +22,12 @@ def create_product(produto: schema.Produto, db: Session = Depends(get_db)):
     return db_produto
 
 
-@app.get("/produtos/", response_model=list[schema.Produto])
+@app.get("/produtos/", response_model=list[schema.ProdutoGet])
 def read_products(db: Session = Depends(get_db)):
     produtos = controller.get_products(db)
     return produtos
 
-@app.get("/produtos/{produto_id}", response_model=schema.Produto)
+@app.get("/produtos/{produto_id}", response_model=schema.ProdutoGet)
 def read_one_product(produto_id: str, db: Session = Depends(get_db)):
     db_produto = controller.get_one_product(db=db, produto_id=produto_id)
     return db_produto
