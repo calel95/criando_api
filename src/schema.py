@@ -7,7 +7,6 @@ from uuid import UUID, uuid4
 
 
 class Produto(BaseModel):
-    id: Optional[UUID] = None
     produto: str | None = None
     preco: int | None = None
 
@@ -16,6 +15,7 @@ class Produto(BaseModel):
 
 class ProdutoGet(Produto):
     created_at: datetime.datetime
+    id: Optional[UUID] = None
 
     class Config:
         from_attributes = True
