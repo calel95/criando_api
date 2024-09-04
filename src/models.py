@@ -8,6 +8,6 @@ class Estoque(Base):
     id = Column(String, primary_key=True)
     produto = Column(String)
     preco = Column(Integer)
-    #is_empty = Column(Boolean)
     created_at = Column(DateTime, default=func.now())
-
+    updated = Column(Boolean, default=False)
+    update_date = Column(DateTime)

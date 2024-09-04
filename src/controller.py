@@ -1,4 +1,6 @@
+from sqlalchemy import Column,DateTime
 from sqlalchemy.orm import Session
+from sqlalchemy.sql import func
 from uuid import UUID, uuid4
 #from models import Estoque
 #from schema import Item
@@ -26,6 +28,8 @@ def update_product(db: Session, produto_id: str, produto: schema.Produto):
         return None  # ou você pode levantar uma exceção aqui  
     db_produto.produto = produto.produto
     db_produto.preco = produto.preco
+    db_produto.updated = True
+    db_produto.update_date = func.now()
     db.commit()
     db.refresh(db_produto)
     return db_produto

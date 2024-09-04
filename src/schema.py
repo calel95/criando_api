@@ -16,6 +16,8 @@ class Produto(BaseModel):
 class ProdutoGet(Produto):
     created_at: datetime.datetime
     id: Optional[UUID] = None
+    updated: bool | None = None
+    update_date: datetime.datetime | None
 
     class Config:
         from_attributes = True
