@@ -1,7 +1,7 @@
 #representacao do banco de dados
 from sqlalchemy import Column, Integer, String, DateTime, Select, Boolean
 from sqlalchemy.sql import func
-from src.db import Base
+from .db import Base
 
 class Estoque(Base):
     __tablename__ = 'estoque'
