@@ -1,43 +1,29 @@
 version: '3.8'
-
-# services:
-#   sqlite:
-#     image: sqlite:latest
-#     volumes:
-#       - sqlite_data:/var/lib/sqlite/data
-#     networks:
-#       - mynetwork
-
-#   src:
-#     build:
-#       context: .
-#       dockerfile: Dockerfile
-#     volumes:
-#       - ./sqlite_data:/app/sqlite_data
-#     environment:
-#       DATABASE_URL: sqlite:///./mydatabase.db
-#     ports:
-#       - "8000:8000"
-#     depends_on:
-#       - sqlite
-#     networks:
-#       - mynetwork
-      
-# networks:
-#   mynetwork: 
-
-# volumes:
-#   sqlite_data:
 services:
-  app:
+  sqlite:
+    image: nouchka/sqlite3:latest  # Exemplo de imagem SQLite
+    volumes:
+      - sqlite_data:/var/lib/sqlite/data
+    networks:
+      - mynetwork
+
+  src:
     build:
       context: ./src
       dockerfile: Dockerfile
     volumes:
       - ./sqlite_data:/app/sqlite_data  # Mapeia o diretório local para persistência
     environment:
-      DATABASE_URL: sqlite:///./database.db
+      DATABASE_URL: sqlite:///app/sqlite_data/database.db  # Corrigido o caminho
     ports:
       - "8000:8000"
+    depends_on:
+      - sqlite
+    networks:
+      - mynetwork
 
-  
+networks:
+  mynetwork: 
+
+volumes:
+  sqlite_data:
